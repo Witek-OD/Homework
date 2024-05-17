@@ -3,13 +3,19 @@ let userNumber=prompt('Пожалуйста введите число');
 var regExp = /^[0-9]+$/g;
 
 if (regExp.test(userNumber)){
-    let curenВegree;
+    let isSimple=true;
 
-    for (let i = 1; i <= 100; i++) {
-
-        if(Math.pow(i, 2) <=userNumber) {
-            console.log(i);
+    for (let i = 2; i < userNumber; i++) {
+        if ((userNumber % i === 0)&&(userNumber!=i)){
+            isSimple=false;
         }
+    }
+
+    if (isSimple) {
+        alert(`Число ${userNumber} является простым`);
+
+    } else {
+        alert(`Число ${userNumber} не является простым`);
     }
 
 } else {
