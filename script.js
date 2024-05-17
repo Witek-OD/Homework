@@ -1,7 +1,9 @@
-let resultString='';
+const dollarExRate=26;
 
-for (let i = 20; i <= 30; i += 0.5) {
-    resultString += `${i} `;
+let resultString=`1 \t $ = ${dollarExRate} \t грн.\n`;
+
+for (let i = 10; i <= 100; i += 10) {
+    resultString += `${i}\t $ = ${i * dollarExRate} \t грн.\n`;
 }
 
 console.log(resultString);
