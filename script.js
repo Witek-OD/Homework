@@ -1,10 +1,17 @@
-const dollarExRate=26;
+let userNumber=prompt('Пожалуйста введите число');
 
-let resultString=`1 \t $ = ${dollarExRate} \t грн.\n`;
+var regExp = /^[0-9]+$/g;
 
-for (let i = 10; i <= 100; i += 10) {
-    resultString += `${i}\t $ = ${i * dollarExRate} \t грн.\n`;
+if (regExp.test(userNumber)){
+    let curenВegree;
+
+    for (let i = 1; i <= 100; i++) {
+
+        if(Math.pow(i, 2) <=userNumber) {
+            console.log(i);
+        }
+    }
+
+} else {
+    alert("Введите ТОЛЬКО число");
 }
-
-console.log(resultString);
-
