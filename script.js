@@ -1,38 +1,39 @@
+//#region Function
+function letterDelete(originalString, whatDelete) {
+  let charDeleteArr = whatDelete.toString().split('');
 
+  for (let currentChar of charDeleteArr)
+  {
+    originalString = originalString.replaceAll(currentChar, '');
+  }
 
-let arr= (+prompt('Пожалуйста введите трёхзначное число')).toString().split('');
-
-if(arr.length!=3)
-{
-    alert(`Необходимо ввести ТРЁХЗНАЧНОЕ число!`);
-}
-else
-{
-    let result='';
-
-    if((arr[0]==arr[1])&&(arr[0]==arr[2]))
-    {
-        result=`все цифры одинаковы`;
-    }
-    else
-    {
-
-        for (let i =0; i< arr.length;i++)
-        {
-            for (let j=0;j< arr.length;j++)
-            {
-                if((arr[i]==arr[j])&&(i!=j))
-                {
-                    result+=`Цифра ${i+1} совпадает с цифрой ${j+1} \n`;
-                }
-            }
-        }
-        if (result=='')
-        {
-            result='Нет одинаковых цифр';
-        }
-
-    }
-    alert(result);
+  return originalString;
 }
 
+function validateString(inputString){
+  let regExp = /[^a-zA-Zа-яА-ЯёЁ .]/;
+    
+    if ( regExp.test(inputString) ){
+        return false;
+    } else {
+        return true;
+    }
+}
+//#endregion
+
+let stringForDelete= prompt('Пожалуйста введите исходную строку');
+
+  if(validateString(stringForDelete)){
+    let stringDeleteLetters= prompt('Пожалуйста введите строку для удаления');
+
+    if(validateString(stringDeleteLetters)){
+       let resultString= letterDelete(stringForDelete, stringDeleteLetters);
+
+        alert(`Результат : \n ${resultString}`);
+    } else {
+          alert (`Строка для удаления должна содержать только буквы!`);
+    }
+
+  } else {
+    alert (`Исходная строка должна содержать только буквы!`);
+  }
