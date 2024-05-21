@@ -1,40 +1,30 @@
 //#region Function
-function letterDelete(originalString, whatDelete) {
+function arithmeticMean(inputArr) {
+  let sum=0;
 
-  for (let currentChar of whatDelete)
-  {
-    originalString = originalString.replaceAll(currentChar, '');
+  let numCount=0;
+
+  for (let currentItem of inputArr) {
+    if(typeof(currentItem)=="number")
+    {
+      sum+=currentItem;
+      numCount++;
+    }
   }
 
-  return originalString;
+  let average = sum / numCount;
+
+  let resultArr=[sum,numCount,average];
+
+  return resultArr;
 }
 
-function validateString(inputString){
-  let regExp = /[^a-zA-Zа-яА-ЯёЁ .]/;
-    
-    if ( regExp.test(inputString) ){
-        return false;
-    } else {
-        return true;
-    }
-}
 //#endregion
 
-let stringForDelete= prompt('Пожалуйста введите исходную строку');
+let originalArr= ['Q', 27.4, 16, 's', 'r', 2, true];
 
-  if(validateString(stringForDelete)){
-    let stringDeleteLetters= prompt('Пожалуйста введите строку для удаления');
+alert(`Исходный массив : \n ${originalArr}`);
 
-    if(validateString(stringDeleteLetters)){
-      let charDeleteArr = stringDeleteLetters.toString().split('');
+let result= arithmeticMean(originalArr);
 
-      let resultString= letterDelete(stringForDelete, charDeleteArr);
-
-        alert(`Результат : \n ${resultString}`);
-    } else {
-          alert (`Строка для удаления должна содержать только буквы!`);
-    }
-
-  } else {
-    alert (`Исходная строка должна содержать только буквы!`);
-  }
+alert(`Исходный массив содержит : \n ${result[1]} цифр \n общей суммой ${result[0]} \n среднее арифметическое составляет ${result[2]}`);
