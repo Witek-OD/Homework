@@ -1,8 +1,7 @@
 //#region Function
 function letterDelete(originalString, whatDelete) {
-  let charDeleteArr = whatDelete.toString().split('');
 
-  for (let currentChar of charDeleteArr)
+  for (let currentChar of whatDelete)
   {
     originalString = originalString.replaceAll(currentChar, '');
   }
@@ -27,7 +26,9 @@ let stringForDelete= prompt('Пожалуйста введите исходну�
     let stringDeleteLetters= prompt('Пожалуйста введите строку для удаления');
 
     if(validateString(stringDeleteLetters)){
-       let resultString= letterDelete(stringForDelete, stringDeleteLetters);
+      let charDeleteArr = stringDeleteLetters.toString().split('');
+
+      let resultString= letterDelete(stringForDelete, charDeleteArr);
 
         alert(`Результат : \n ${resultString}`);
     } else {
