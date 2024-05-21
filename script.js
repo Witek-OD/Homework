@@ -1,30 +1,14 @@
 //#region Function
-function arithmeticMean(inputArr) {
-  let sum=0;
-
-  let numCount=0;
-
-  for (let currentItem of inputArr) {
-    if(typeof(currentItem)=="number")
-    {
-      sum+=currentItem;
-      numCount++;
-    }
-  }
-
-  let average = sum / numCount;
-
-  let resultArr=[sum,numCount,average];
+function removeElement(array, item) {
+  let resultArr = array.filter((n) => {return n !== item});
 
   return resultArr;
 }
 
 //#endregion
 
-let originalArr= ['Q', 27.4, 16, 's', 'r', 2, true];
+const array = [1, 3, 4, 6, 2, 5, 7];
 
-alert(`Исходный массив : \n ${originalArr}`);
+let result= removeElement(array,4);
 
-let result= arithmeticMean(originalArr);
-
-alert(`Исходный массив содержит : \n ${result[1]} цифр \n общей суммой ${result[0]} \n среднее арифметическое составляет ${result[2]}`);
+console.log(result);
