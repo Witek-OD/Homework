@@ -1,38 +1,19 @@
+//#region Function
+function addition() {
+  let curentValue = 0;
 
-
-let arr= (+prompt('Пожалуйста введите трёхзначное число')).toString().split('');
-
-if(arr.length!=3)
-{
-    alert(`Необходимо ввести ТРЁХЗНАЧНОЕ число!`);
+  return function(add) {
+    return curentValue += add;
+  }
 }
-else
-{
-    let result='';
+//#endregion
 
-    if((arr[0]==arr[1])&&(arr[0]==arr[2]))
-    {
-        result=`все цифры одинаковы`;
-    }
-    else
-    {
+let sum = addition();
 
-        for (let i =0; i< arr.length;i++)
-        {
-            for (let j=0;j< arr.length;j++)
-            {
-                if((arr[i]==arr[j])&&(i!=j))
-                {
-                    result+=`Цифра ${i+1} совпадает с цифрой ${j+1} \n`;
-                }
-            }
-        }
-        if (result=='')
-        {
-            result='Нет одинаковых цифр';
-        }
+console.log(sum(4));  // 0
 
-    }
-    alert(result);
-}
+console.log(sum(6));  // 1
 
+console.log(sum(10));  // 2
+
+console.log(sum(7));  // 2
