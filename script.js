@@ -1,19 +1,17 @@
 //#region Function
-function addition() {
-  let curentValue = 0;
+function curry(func) {
+     return function(first) {
+        return function(second) {
+            return func(first, second);
+        };
+    };
+}
 
-  return function(add) {
-    return curentValue += add;
-  }
+function sum(x, y) {
+    return x + y;
 }
 //#endregion
 
-let sum = addition();
+let name = curry(sum);
 
-console.log(sum(4));
-
-console.log(sum(6));
-
-console.log(sum(10));
-
-console.log(sum(7));
+console.log( name(5)(2) );
