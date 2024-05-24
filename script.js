@@ -10,10 +10,10 @@ function addition() {
 
 let sum = addition();
 
-console.log(sum(4));  // 0
+console.log(sum(4));
 
-console.log(sum(6));  // 1
+console.log(sum(6));
 
-console.log(sum(10));  // 2
+console.log(sum(10));
 
-console.log(sum(7));  // 2
+console.log(sum(7));
