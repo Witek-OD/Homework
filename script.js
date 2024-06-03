@@ -1,38 +1,33 @@
+let ladder = {
+  totalStage:10,
+  currentStage: 0,
+    up: function () { // підніматиме вас на одну сходинку
+      if( this.currentStage < this.totalStage)
+      {
+        this.currentStage ++;
+        console.log( `Вы поднялись на одну ступень вверх`);
+      } else {
+        console.log( `Вы не можете поднятся выше!`);
+      }
 
-
-let arr= (+prompt('Пожалуйста введите трёхзначное число')).toString().split('');
-
-if(arr.length!=3)
-{
-    alert(`Необходимо ввести ТРЁХЗНАЧНОЕ число!`);
-}
-else
-{
-    let result='';
-
-    if((arr[0]==arr[1])&&(arr[0]==arr[2]))
-    {
-        result=`все цифры одинаковы`;
-    }
-    else
-    {
-
-        for (let i =0; i< arr.length;i++)
+      return this;
+    },
+    down: function () { // опускатиме вас на одну сходинку
+        if( this.currentStage > 0)
         {
-            for (let j=0;j< arr.length;j++)
-            {
-                if((arr[i]==arr[j])&&(i!=j))
-                {
-                    result+=`Цифра ${i+1} совпадает с цифрой ${j+1} \n`;
-                }
-            }
-        }
-        if (result=='')
-        {
-            result='Нет одинаковых цифр';
+          this.currentStage --;
+          console.log( `Вы спустились на одну ступень вниз`);
+        } else {
+          console.log(`Вы не можете спустится ниже!`);
         }
 
-    }
-    alert(result);
-}
+      return this;
+    },
+    showStep: function () { // показує поточну сходинку
+      console.log(`Вы находитесь на ступени ${this.currentStage}`);
 
+      return this;
+    }
+};
+
+ladder.up().up().down().showStep();
