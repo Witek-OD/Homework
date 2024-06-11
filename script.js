@@ -1,38 +1,59 @@
+function createTable (colsStart ,colsEnd  , rowsStart , rowsEnd ) {
 
+  if(checkData(colsStart ,colsEnd  , rowsStart , rowsEnd )){
 
-let arr= (+prompt('Пожалуйста введите трёхзначное число')).toString().split('');
+    let forTable = document.getElementById('forTable');
 
-if(arr.length!=3)
-{
-    alert(`Необходимо ввести ТРЁХЗНАЧНОЕ число!`);
-}
-else
-{
-    let result='';
+    forTable.innerHTML=''; // очистка на случай повторного вызова функции
 
-    if((arr[0]==arr[1])&&(arr[0]==arr[2]))
-    {
-        result=`все цифры одинаковы`;
-    }
-    else
-    {
+    let tb = document.createElement('table');
 
-        for (let i =0; i< arr.length;i++)
-        {
-            for (let j=0;j< arr.length;j++)
-            {
-                if((arr[i]==arr[j])&&(i!=j))
-                {
-                    result+=`Цифра ${i+1} совпадает с цифрой ${j+1} \n`;
-                }
-            }
-        }
-        if (result=='')
-        {
-            result='Нет одинаковых цифр';
+    for (let i = rowsStart; i<rowsEnd; i++) {
+      let row = document.createElement('tr')
+
+      for (let j = colsStart; j<colsEnd; j++) {
+        let cell = document.createElement((i==0 || j==0)? 'th' : 'td')
+
+        if(i==0){
+          cell.textContent = j;
+        } else if (j==0){
+          cell.textContent = i;
+        } else {
+          cell.textContent = i*j;
         }
 
+        row.append(cell);
+      }
+
+      tb.append(row);
     }
-    alert(result);
+
+    forTable.append(tb);
+
+  }
+
 }
 
+function checkData (colsStart ,colsEnd  , rowsStart , rowsEnd ) {
+
+  if ( ( colsEnd <1) || ( rowsEnd <1) ){
+
+    alert('Размер таблици должен быть положительным числом!');
+    return false;
+  }
+
+  if ( (colsEnd >10) || ( rowsEnd >10) || (rowsStart>10) || (colsStart)>10){
+    alert('Размер таблици умножения должен быть меньше 10!');
+    return false;
+  }
+
+  if (( rowsStart >= rowsEnd ) || (colsStart >= colsEnd)){
+
+    alert('Номер начального элемента таблицы должен быть меньше номера конечного элемента !');
+    return false;
+  }
+
+  return true;
+}
+
+createTable(0,10,0,10);
