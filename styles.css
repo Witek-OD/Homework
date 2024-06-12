@@ -1,12 +1,4 @@
-table {
-    border-collapse: collapse;
-}
-
-td {
-    border: 1px solid black;
-    padding: 3px 5px;
-    background-color: silver;
-}
-th{
-    background-color: aquamarine;
+.btnClick {
+    color: red;
+    font-size: 22px;
 }
