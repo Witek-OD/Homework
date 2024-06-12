@@ -1,9 +1,11 @@
-function changeColor () {
-  let text = document.getElementById('testText');
-  text.classList.toggle("btnClick");
+function randomInteger(min, max) {
+  let rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
 }
 
-const element = document.getElementById('testBtn');
+window.onload = function (){
+let imgPath=`img/${randomInteger(1,10)}.jpg`;
 
-element.addEventListener('click',changeColor);
-
+const img=document.getElementById('currentImg');
+  img.src = imgPath;
+}
