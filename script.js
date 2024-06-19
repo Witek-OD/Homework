@@ -21,7 +21,6 @@ function setDefaultTask(countTask) {
 
     addTask(`Задание ${i} `);
   }
-  items = document.querySelectorAll('li');
 }
 
 function addTask(textTask){
