@@ -1,24 +1,61 @@
-let btnGo=document.getElementById('go');
+let btnAdd=document.getElementById('addTask');
 
-let btnGet =document.getElementById('getLink');
+let inNewTask=document.getElementById('newTask');
 
-btnGo.setAttribute('disabled', '');
+let todoList= document.getElementById('toDo');
 
-let inputLink;
+let items = document.querySelectorAll('li');
 
-function getLink(){
-  inputLink = prompt("Введите адрес страници" ,'https://www.google.com/');
-  if (inputLink!==''){
-    btnGo.removeAttribute('disabled');
-
-    btnGo.addEventListener('click', function (event){
-      window.location.href = inputLink;
-      }
-    )
+btnAdd.addEventListener('click',() => {
+  if(inNewTask.value !== ''){
+    addTask(inNewTask.value);
+    inNewTask.value='';
   }
+
+})
+
+function setDefaultTask(countTask) {
+  let todoList= document.getElementById('toDo');
+
+  for (let i=1 ;i<=countTask ;i++) {
+
+    addTask(`Задание ${i} `);
+  }
+  items = document.querySelectorAll('li');
 }
 
-btnGet.addEventListener('click',getLink);
+function addTask(textTask){
+  let newTask=document.createElement('li');
+
+  newTask.innerText=textTask;
+
+  let btnRem= document.createElement('button');
+
+  btnRem.innerText='Удалить';
+
+  newTask.append(btnRem);
+
+  todoList.append(newTask);
+
+  addListner();
+}
+
+function addListner(){
+
+  items = document.querySelectorAll('li');
+
+  items.forEach((task)=> {
+
+      task.addEventListener('click', function (event) {
+        this.remove();
+      })
+
+  })
+}
+
+window.onload = ()=>{
+  setDefaultTask(3);
+}
 
 
 
