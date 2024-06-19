@@ -1,11 +1,24 @@
-function randomInteger(min, max) {
-  let rand = min + Math.random() * (max + 1 - min);
-  return Math.floor(rand);
+let btnGo=document.getElementById('go');
+
+let btnGet =document.getElementById('getLink');
+
+btnGo.setAttribute('disabled', '');
+
+let inputLink;
+
+function getLink(){
+  inputLink = prompt("Введите адрес страници" ,'https://www.google.com/');
+  if (inputLink!==''){
+    btnGo.removeAttribute('disabled');
+
+    btnGo.addEventListener('click', function (event){
+      window.location.href = inputLink;
+      }
+    )
+  }
 }
 
-window.onload = function (){
-let imgPath=`img/${randomInteger(1,10)}.jpg`;
+btnGet.addEventListener('click',getLink);
 
-const img=document.getElementById('currentImg');
-  img.src = imgPath;
-}
+
+
