@@ -360,6 +360,31 @@ form.addEventListener('submit', event => {
   if(errInput.length > 0) {
     alert(`Введите корректные данные в поля : \n${errInput.toString()}`);
   } else {
+
+    const url = 'https://example.com/api/submit';
+
+    const formData = new FormData();
+
+    formData.append('username', username.value);
+
+    formData.append('message', message.value);
+
+    formData.append('phone', phone.value);
+
+    formData.append('email', email.value);
+
+    fetch(url, {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.text())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Помилка: ' + error);
+    });
+
     console.log(`Username: ${username.value}`);
 
     console.log(`Message: ${message.value}`);
@@ -377,7 +402,6 @@ let message=document.getElementById('message');
 let phone = document.getElementById('phone');
 
 let email= document.getElementById('email');
-
 
 username.addEventListener('input',chekName);
 
