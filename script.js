@@ -59,7 +59,7 @@ function getImage(countImage) {
   countImage - количество картинок из папки имена цифра.jpg
   Поднимать web сервер чтобы он вычитывал папку и отдавал по api нет ни времени ни желания
   */
-  debugger
+
   let result =[];
   for (let i = 1; i<=countImage; i++)
   {
