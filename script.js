@@ -1,38 +1,37 @@
+class BankAccount {
+  #account;
 
+  constructor(initialAmount) {
+    this.#account = initialAmount;
+  }
 
-let arr= (+prompt('Пожалуйста введите трёхзначное число')).toString().split('');
-
-if(arr.length!=3)
-{
-    alert(`Необходимо ввести ТРЁХЗНАЧНОЕ число!`);
-}
-else
-{
-    let result='';
-
-    if((arr[0]==arr[1])&&(arr[0]==arr[2]))
-    {
-        result=`все цифры одинаковы`;
+  deposit(inMoney){
+    if(inMoney>0){
+      this.#account+=inMoney;
     }
-    else
-    {
+  }
 
-        for (let i =0; i< arr.length;i++)
-        {
-            for (let j=0;j< arr.length;j++)
-            {
-                if((arr[i]==arr[j])&&(i!=j))
-                {
-                    result+=`Цифра ${i+1} совпадает с цифрой ${j+1} \n`;
-                }
-            }
-        }
-        if (result=='')
-        {
-            result='Нет одинаковых цифр';
-        }
-
+  withdraw(outMoney){
+    if(outMoney>0){
+      this.#account-=outMoney;
     }
-    alert(result);
+  }
+
+  getBalance(){
+    return this.#account;
+  }
+
 }
+
+const account1 = new BankAccount(1000);
+
+console.log(account1.getBalance());
+
+account1.deposit(500);
+
+console.log(account1.getBalance());
+
+account1.withdraw(200);
+
+console.log(account1.getBalance());
 
