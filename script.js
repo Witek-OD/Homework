@@ -1,25 +1,30 @@
-class Coach {
-  #fullName;
-  #specialization;
-  #rank;
+class Calculator {
 
-  constructor(coachName , coachSpecial , coachRank) {
-    this.#fullName = coachName;
-    this.#specialization = coachSpecial;
-    this.#rank = coachRank;
+  add(x,y){
+    return x+y;
   }
 
-  displayInfo(){
-    console.log(`Coach: ${this.#fullName}, Specialization: ${this.#specialization}, Rating: ${this.#rank}`);
+  subtract(x,y){
+    return x-y;
+}
+
+  multiply(x,y){
+    return x*y;
   }
+
+  divide(x,y){
+    return y!==0 ? x / y : 'Ошибка , деление на ноль!'
 
 }
 
-const coach1 = new Coach('John Doe', 'Fitness', 4.7);
+}
 
-const coach2 = new Coach('Alice Smith', 'Yoga', 4.9);
+const calc = new Calculator();
 
-coach1.displayInfo();
+console.log(calc.add(5, 3));
 
-coach2.displayInfo();
+console.log(calc.subtract(10, 4));
 
+console.log(calc.multiply(3, 6));
+
+console.log(calc.divide(8, 2));
