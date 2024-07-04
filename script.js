@@ -1,37 +1,25 @@
-class BankAccount {
-  #account;
+class Coach {
+  #fullName;
+  #specialization;
+  #rank;
 
-  constructor(initialAmount) {
-    this.#account = initialAmount;
+  constructor(coachName , coachSpecial , coachRank) {
+    this.#fullName = coachName;
+    this.#specialization = coachSpecial;
+    this.#rank = coachRank;
   }
 
-  deposit(inMoney){
-    if(inMoney>0){
-      this.#account+=inMoney;
-    }
-  }
-
-  withdraw(outMoney){
-    if(outMoney>0){
-      this.#account-=outMoney;
-    }
-  }
-
-  getBalance(){
-    return this.#account;
+  displayInfo(){
+    console.log(`Coach: ${this.#fullName}, Specialization: ${this.#specialization}, Rating: ${this.#rank}`);
   }
 
 }
 
-const account1 = new BankAccount(1000);
+const coach1 = new Coach('John Doe', 'Fitness', 4.7);
 
-console.log(account1.getBalance());
+const coach2 = new Coach('Alice Smith', 'Yoga', 4.9);
 
-account1.deposit(500);
+coach1.displayInfo();
 
-console.log(account1.getBalance());
-
-account1.withdraw(200);
-
-console.log(account1.getBalance());
+coach2.displayInfo();
 
