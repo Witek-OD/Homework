@@ -1,4 +1,5 @@
 
+document.querySelector('button').addEventListener("click", getWeather);
 async function getWeather() {
     const key = '26c26c581e9807d1cc62890c0f7367ad';
     const lat = 46.4775;

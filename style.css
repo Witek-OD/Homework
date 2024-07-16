@@ -59,3 +59,9 @@ img {
     font-weight: 900;
     text-align: right;
 }
+button{
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: #83eaf1;
+    border: 2px solid #eb6e16;
+}
