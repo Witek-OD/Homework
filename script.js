@@ -1,38 +1,32 @@
 
+async function getWeather() {
+    const key = '26c26c581e9807d1cc62890c0f7367ad';
+    const lat = 46.4775;
+    const lon = 30.7326;
 
-let arr= (+prompt('Пожалуйста введите трёхзначное число')).toString().split('');
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}`);
+    const data = await res.json();
 
-if(arr.length!=3)
-{
-    alert(`Необходимо ввести ТРЁХЗНАЧНОЕ число!`);
-}
-else
-{
-    let result='';
-
-    if((arr[0]==arr[1])&&(arr[0]==arr[2]))
-    {
-        result=`все цифры одинаковы`;
+    if (res.status !== 200) {
+        alert(data.message);
+    } else {
+        showWeather(data);
     }
-    else
-    {
-
-        for (let i =0; i< arr.length;i++)
-        {
-            for (let j=0;j< arr.length;j++)
-            {
-                if((arr[i]==arr[j])&&(i!=j))
-                {
-                    result+=`Цифра ${i+1} совпадает с цифрой ${j+1} \n`;
-                }
-            }
-        }
-        if (result=='')
-        {
-            result='Нет одинаковых цифр';
-        }
-
-    }
-    alert(result);
 }
 
+function showWeather(data) {
+    const now =new Date();
+    const datetimeShow=`${now.getDate()}.${now.getMonth()}.${now.getFullYear()}   ${now.getHours()}:${now.getMinutes()}`
+    document.querySelector('.weather').innerHTML = `
+    <div class="left">
+        <b class="city">${data.name}</b>
+        <span>Now: <b>${datetimeShow}</b></span>
+        <span>Humidity: <b>${data.main.humidity}%</b></span>
+        <span>Wind: <b>${Math.round(data.wind.speed)} m/s</b></span>
+    </div>
+    <div class="right">
+        <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">
+        <span class="temp">${Math.round(data.main.temp - 273)}℃</span>
+    </div>`;
+}
+document.addEventListener('DOMContentLoaded', getWeather);
