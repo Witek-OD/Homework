@@ -16,7 +16,9 @@ async function getWeather() {
 
 function showWeather(data) {
     const now =new Date();
-    const datetimeShow=`${now.getDate()}.${now.getMonth()}.${now.getFullYear()}   ${now.getHours()}:${now.getMinutes()}`
+    const datetimeShow=`${ now.getDate() < 10 ? '0' + now.getDate() : now.getDate()}.${ now.getMonth() < 10 ? '0' + now.getMonth() : now.getMonth()}.${ now.getFullYear()}
+${now.getHours() < 10 ? '0' + now.getHours() : now.getHours()}:${now.getMinutes() < 10 ? '0' + now.getMinutes() : now.getMinutes()}`;
+
     document.querySelector('.weather').innerHTML = `
     <div class="left">
         <b class="city">${data.name}</b>
