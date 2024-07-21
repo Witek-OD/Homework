@@ -1,38 +1,149 @@
+const form= $(".js--form"); // форма ввода
 
+const inTask = $("#inTask");  // Поле ввода новой задачи
 
-let arr= (+prompt('Пожалуйста введите трёхзначное число')).toString().split('');
+const liToDo = $(".js--todos-wrapper"); // ul для отображения
 
-if(arr.length!=3)
-{
-    alert(`Необходимо ввести ТРЁХЗНАЧНОЕ число!`);
-}
-else
-{
-    let result='';
+let taskArr=getToDo();  // массив задач для отображения
 
-    if((arr[0]==arr[1])&&(arr[0]==arr[2]))
-    {
-        result=`все цифры одинаковы`;
-    }
-    else
-    {
+function getToDo() {  // загружаем из хранилища
+    const tasksJSON =localStorage.getItem('tasks')
 
-        for (let i =0; i< arr.length;i++)
-        {
-            for (let j=0;j< arr.length;j++)
-            {
-                if((arr[i]==arr[j])&&(i!=j))
-                {
-                    result+=`Цифра ${i+1} совпадает с цифрой ${j+1} \n`;
-                }
-            }
-        }
-        if (result=='')
-        {
-            result='Нет одинаковых цифр';
-        }
-
-    }
-    alert(result);
+    return tasksJSON ? JSON.parse(tasksJSON) :[];
 }
 
+function setToDo(tasks){ // записываем в хранилище
+    localStorage.setItem('tasks',JSON.stringify(tasks));
+}
+
+function getId(){ // Генератор уникального Id
+    const timestamp = Date.now();
+
+    const randomPart= Math.floor(Math.random() * 10000);
+
+    const randomPart2= Math.floor(Math.random() * 10000);
+
+    return timestamp +randomPart + randomPart2;
+}
+
+function updateList(tasks) { //перерисовываем список
+    liToDo.html('');
+    if(!tasks || !tasks.length) {
+        return;
+    }
+
+    tasks.forEach((task) =>{
+        showTask(task);
+    });
+    updateListners();
+}
+
+function getIndex(event) { // получение индекса в массиве по id
+    const task= event.target.closest('.todo-item');
+
+    const id=Number(task.id);
+
+    const index = taskArr.findIndex(task =>task.id===id);
+
+        return index;
+}
+
+function clickTask(event){
+    event.stopPropagation();
+
+    if(event.target.closest(('.todo-item'))){ // Чекбокс , пометить как выполненую
+
+        if(event.target.closest('.todo-cb') )
+        {
+            taskArr[getIndex(event)].isCompleted=true;    // если задача помечена как выполненая , то изменить это нельзя
+
+            setToDo(taskArr);
+
+            updateList(taskArr);
+
+        }
+        else if (event.target.closest('.todo-item__button')){ // Кнопка удаления
+
+            taskArr.splice(getIndex(event),1);
+
+            setToDo(taskArr);
+
+            updateList(taskArr);
+        } else {  // Любое другое место нажатия
+           let modalDetail= $('#detailModal');
+
+            modalDetail.html('');
+
+            modalDetail.html(`<div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">${taskArr[getIndex(event)].isCompleted ? 'Выполнено' : 'Не выполнено'}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ${taskArr[getIndex(event)].text}
+             </div>
+             <div class="modal-footer">
+
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+               
+             </div>
+         </div>
+     </div>`);
+
+            modalDetail.modal('show');
+        }
+    }
+}
+
+function setTask (event) {//ввод новой задачи
+    event.preventDefault();
+
+    let task=$("#inTask").val().trim().replace(/\s+/g ,' '); //чистка от лишних пробелов
+
+    if (!task){
+        return alert('Поле не должно быть пустым');
+    }
+
+    let newTask ={};
+
+    newTask.id=getId();
+
+    newTask.text=task;
+
+    newTask.isCompleted =false; //при создании задача помечается как не выполненная
+
+    taskArr.push(newTask);
+
+    setToDo(taskArr);
+
+    updateList(taskArr);
+
+    $("#inTask").val('');
+
+}
+
+function showTask (taskItem) { // отображение одной задачи на форме
+
+    let newTask = document.createElement('li');
+
+    newTask.classList.add('todo-item');
+
+    newTask.id=taskItem.id;
+
+    if(taskItem.isCompleted) {
+        newTask.classList.add('todo-item--checked');
+    }
+    newTask.innerHTML=`<input type="checkbox" class="todo-cb" ${taskItem.isCompleted ? 'checked="checked"' : ''}><span class="todo-item__description" >${taskItem.text}</span><button class="todo-item__button">Видалити</button>`;
+    liToDo.append(newTask);
+}
+
+$(".js--form").on('submit',setTask);
+
+function updateListners() {
+
+    liToDo.on('click',clickTask);
+
+}
+
+$(document).ready(updateList(taskArr));
