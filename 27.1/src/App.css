@@ -1,0 +1,144 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.2;
+  font-size: 18px;
+  background-color: #66deb2;
+}
+
+h1, h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 75%;
+}
+
+.three a:hover {background: #66deb2}
+.menu ul {
+  display: -webkit-flex;
+  display: flex;
+
+  padding-left: 0;
+
+  list-style: none;
+
+}
+
+.menu a {
+  padding: 1em;
+  display: block;
+  color:  black;
+  border-right: 1px solid #131210;
+
+  text-decoration: none;
+
+}
+.menu a:hover {
+  background: #FFf;
+
+}
+
+
+.form {
+  background: #fff;
+  padding: 10px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.form__input {
+  min-height: 25px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid;
+}
+
+.form__btn {
+  background: #0be69d;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+}
+
+.todo-item {
+  display: flex;
+  padding: 10px;
+  background: #fff;
+  border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.todo-item--checked {
+  text-decoration: line-through;
+}
+.todo-item__description {
+  flex-grow: 1;
+  padding-left: 10px;
+}
+.todo-item__button {
+  background: #0be69d;
+  border: none;
+  cursor: pointer;
+  width: 95px;
+  padding: 10px;
+  border-radius: 8px;
+
+}
+
+.light-theme{
+  background-color: #0be69d;
+}
+
+.dark-theme{
+  background-color: #077122;
+}
